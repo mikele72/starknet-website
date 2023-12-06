@@ -37,7 +37,7 @@ type Props = {
   | "cyan"
   | "pink"
   | "grey",
-  orientation?: "left" | "right"
+  orientation?: "left" | "right" | "vertical"
   onClick?: () => void;
 };
 
@@ -129,7 +129,9 @@ export const ImageIconCard = ({
             base: variant === "community_card" ? "24px" : variant === "large_card" ? "24px" : "0",
             md: variant === "community_card" ? "16px" : variant === "large_card" ? "48px" : "0"
           }}
-          {...(orientation === "right" && variant === "large_card" && { justifyContent: "space-between" })}
+          {...(orientation !== "vertical" && variant === "large_card" && {
+            justifyContent: "center"
+          })}
           alignItems={{ lg: variant === "large_card" ? "center" : "initial" }}
           height="100%"
         >
@@ -165,7 +167,10 @@ export const ImageIconCard = ({
           >
             <CardBody
               padding="0"
-              {...(variant === "large_card" && { flex: "inherit" })}
+              {...(variant === "large_card" && {
+                flex: "inherit",
+                maxWidth: '460px'
+              })}
             >
               <Stack spacing="3">
                 <Heading variant={titleVariant as titleVariantType} lineHeight="100%" {...(variant === "large_card" && { paddingBottom: "8px" })}>
